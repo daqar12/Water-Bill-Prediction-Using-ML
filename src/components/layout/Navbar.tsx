@@ -6,20 +6,13 @@ import { usePathname } from "next/navigation";
 
 export function Navbar() {
     const pathname = usePathname();
-    // Capitalize first letter of the route for the title
-    const title = pathname.split("/")[1]
-        ? pathname.split("/")[1].charAt(0).toUpperCase() + pathname.split("/")[1].slice(1)
-        : "Dashboard";
+    // Capitalize first letter of the route for the titl;
 
     return (
         <header className="h-20 bg-card border-b flex items-center justify-between px-8 sticky top-0 z-10 w-full shadow-sm">
-            <div className="flex items-center gap-4">
-                <h1 className="text-2xl font-bold font-heading text-slate-800 dark:text-slate-100 hidden md:block">
-                    {title}
-                </h1>
-            </div>
 
-            <div className="flex flex-1 items-center justify-end gap-6">
+
+            <div className="flex flex-1 items-left justify-end gap-6">
                 <div className="relative w-full max-w-md hidden md:block">
                     <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
                     <input

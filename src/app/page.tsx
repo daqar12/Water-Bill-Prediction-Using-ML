@@ -11,15 +11,43 @@ export default function LoginPage() {
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
+
     setIsLoading(true);
 
-    // Simulate login delay
-    setTimeout(() => {
-      setIsLoading(false);
+    try {
+      const res = await fetch("http://127.0.0.1:8000/login", {
+        method: "POST",
+
+        headers: {
+          "Content-Type": "application/json",
+        },
+
+        body: JSON.stringify({
+          email,
+          password,
+        }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        alert(data.detail);
+
+        setIsLoading(false);
+
+        return;
+      }
+
+      localStorage.setItem("user", JSON.stringify(data.user));
+
       router.push("/dashboard");
-    }, 1000);
+    } catch {
+      alert("Server error");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -27,7 +55,9 @@ export default function LoginPage() {
       <div className="w-full max-w-md animate-in fade-in zoom-in-95 duration-500">
         <div className="flex justify-center mb-8">
           <div className="w-16 h-16 bg-primary rounded-2xl flex items-center justify-center shadow-lg shadow-primary/25">
-            <span className="text-3xl font-bold text-white font-heading">A</span>
+            <span className="text-3xl font-bold text-white font-heading">
+              W
+            </span>
           </div>
         </div>
 
@@ -37,7 +67,7 @@ export default function LoginPage() {
               Welcome Back
             </CardTitle>
             <p className="text-slate-500 text-sm">
-              Sign in to ADT Management System
+              Sign in to Water Bill Prediction
             </p>
           </CardHeader>
           <CardContent className="p-8 pt-4">
@@ -61,7 +91,10 @@ export default function LoginPage() {
                   <label className="text-sm font-medium text-slate-700 dark:text-slate-300">
                     Password
                   </label>
-                  <a href="#" className="text-xs font-medium text-primary hover:text-primary/80 transition-colors">
+                  <a
+                    href="#"
+                    className="text-xs font-medium text-primary hover:text-primary/80 transition-colors"
+                  >
                     Forgot Password?
                   </a>
                 </div>

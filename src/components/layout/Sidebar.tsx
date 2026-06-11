@@ -14,20 +14,24 @@ import {
     Settings,
     LogOut,
     GraduationCap,
-    FolderOpen
+    FolderOpen,
+    UserRound,
+    UsersRound,
+    Gauge,
+    BrainCircuit,
+    CreditCard,
+    Receipt
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const menuItems = [
     { name: "Dashboard", icon: LayoutDashboard, href: "/dashboard" },
-    { name: "Orphans", icon: GraduationCap, href: "/dashboard/orphans" },
-    { name: "Sponsors", icon: HeartHandshake, href: "/dashboard/sponsors" },
-    { name: "Donations", icon: HandCoins, href: "/dashboard/donations" },
-    { name: "Relief Campaigns", icon: Calendar, href: "/dashboard/campaigns" },
-    { name: "Beneficiaries", icon: Users, href: "/dashboard/beneficiaries" },
-    { name: "Projects", icon: Briefcase, href: "/dashboard/projects" },
+    { name: "Customers", icon: UsersRound, href: "/dashboard/customers" },
+    { name: "Meter Readings", icon: Gauge, href: "/dashboard/Meter" },
+    { name: "ML Predictions", icon: BrainCircuit, href: "/dashboard/predictions" },
+    { name: "Payments", icon: CreditCard, href: "/dashboard/Payments" },
+    { name: "Billing", icon: Receipt, href: "/dashboard/billing" },
     { name: "Users", icon: Users, href: "/dashboard/users" },
-    { name: "Documents", icon: FolderOpen, href: "/dashboard/documents" },
     { name: "Reports", icon: FileText, href: "/dashboard/reports" },
     { name: "Settings", icon: Settings, href: "/dashboard/settings" },
 ];
@@ -41,10 +45,7 @@ export function Sidebar() {
         >
             <div className="flex items-center justify-between p-6 h-20 border-b">
                 <div className="flex items-center gap-2">
-                    <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center font-bold text-white">
-                        A
-                    </div>
-                    <span className="font-heading font-bold text-xl text-primary">ADT</span>
+                    <span className="font-heading font-bold text-xl text-primary">Water Prediction ML</span>
                 </div>
             </div>
 

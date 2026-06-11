@@ -14,8 +14,8 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "ADT | NGO Management System",
-  description: "Modern NGO Management System for African Development Trust",
+  title: "Water Bill Prediction ML",
+  description: "Modern water bill prediction using Machine Learning system",
 };
 
 export default function RootLayout({

@@ -4,7 +4,7 @@
   --font-heading: var(--font-poppins);
   --font-body: var(--font-inter);
 
-  --color-primary: #0F766E;
+  --color-primary: #0b1ff6;
   --color-secondary: #F59E0B;
   --color-background: #F8FAFC;
   --color-card: #FFFFFF;
@@ -20,9 +20,9 @@
   --background: #F8FAFC;
   --foreground: #0F172A;
   --card: #FFFFFF;
-  --primary: #0F766E;
+  --primary: #0b1ff6;
   --secondary: #F59E0B;
-  --success: #22C55E;
+  --success: #1d87f8;
   --danger: #EF4444;
 }
 
@@ -31,7 +31,7 @@
     --background: #020617;
     --foreground: #F8FAFC;
     --card: #0F172A;
-    --primary: #2DD4BF;
+    --primary: #2020fb;
   }
 }
 
