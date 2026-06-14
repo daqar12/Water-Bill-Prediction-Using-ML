@@ -102,10 +102,10 @@ export default function MeterReadingsPage() {
                         <Download className="w-4 h-4" />
                         Export CSV
                     </Button>
-                    <Button className="gap-2 shadow-lg shadow-primary/20">
+                    {/* <Button className="gap-2 shadow-lg shadow-primary/20">
                         <Plus className="w-4 h-4" />
                         Add Reading
-                    </Button>
+                    </Button> */}
                 </div>
             </div>
 

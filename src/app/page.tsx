@@ -4,51 +4,42 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
+import { saveSession } from "@/lib/session";
 
 export default function LoginPage() {
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-
+    setError("");
     setIsLoading(true);
 
     try {
       const res = await fetch("http://127.0.0.1:8000/login", {
         method: "POST",
-
-        headers: {
-          "Content-Type": "application/json",
-        },
-
-        body: JSON.stringify({
-          email,
-          password,
-        }),
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
       });
 
       const data = await res.json();
-
       if (!res.ok) {
-        alert(data.detail);
-
-        setIsLoading(false);
-
+        setError(data.detail ?? "Login failed");
         return;
       }
 
-      localStorage.setItem("user", JSON.stringify(data.user));
-
+      saveSession(data.session_token, data.user); // ← matches what backend now returns
       router.push("/dashboard");
     } catch {
-      alert("Server error");
+      setError("Cannot reach server. Please try again.");
     } finally {
       setIsLoading(false);
     }
   };
+  
 
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-slate-950 flex flex-col justify-center items-center p-4">
@@ -70,8 +61,16 @@ export default function LoginPage() {
               Sign in to Water Bill Prediction
             </p>
           </CardHeader>
+
           <CardContent className="p-8 pt-4">
             <form onSubmit={handleLogin} className="space-y-5">
+              {/* Error banner */}
+              {error && (
+                <div className="px-4 py-3 rounded-lg bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-800 text-rose-600 dark:text-rose-400 text-sm">
+                  {error}
+                </div>
+              )}
+
               <div className="space-y-2">
                 <label className="text-sm font-medium text-slate-700 dark:text-slate-300">
                   Email Address
@@ -119,7 +118,7 @@ export default function LoginPage() {
                     Signing in...
                   </span>
                 ) : (
-                  "Login"
+                  "Sign In"
                 )}
               </Button>
             </form>

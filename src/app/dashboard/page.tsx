@@ -175,66 +175,7 @@ export default function DashboardPage() {
         
       </div>
 
-      {/* Recent Activity */}
-      <Card>
-        <CardHeader>
-          <CardTitle>Recent Activities</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="overflow-x-auto">
-            <table className="w-full text-sm text-left">
-              <thead className="text-xs text-slate-500 uppercase bg-slate-50 dark:bg-slate-800/50">
-                <tr>
-                  <th scope="col" className="px-6 py-3 rounded-tl-lg">
-                    Action
-                  </th>
-                  <th scope="col" className="px-6 py-3">
-                    Subject
-                  </th>
-                  <th scope="col" className="px-6 py-3">
-                    Time
-                  </th>
-                  <th
-                    scope="col"
-                    className="px-6 py-3 rounded-tr-lg text-right"
-                  >
-                    Status
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {recentActivities.map((activity) => (
-                  <tr
-                    key={activity.id}
-                    className="border-b last:border-0 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors"
-                  >
-                    <td className="px-6 py-4 font-medium text-slate-900 dark:text-slate-100">
-                      {activity.action}
-                    </td>
-                    <td className="px-6 py-4 text-slate-500">
-                      {activity.subject}
-                    </td>
-                    <td className="px-6 py-4 text-slate-500">
-                      {activity.time}
-                    </td>
-                    <td className="px-6 py-4 text-right">
-                      <span
-                        className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium capitalize ${
-                          activity.status === "completed"
-                            ? "bg-success/10 text-success"
-                            : "bg-secondary/10 text-secondary"
-                        }`}
-                      >
-                        {activity.status}
-                      </span>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </CardContent>
-      </Card>
+      
     </div>
   );
 }
