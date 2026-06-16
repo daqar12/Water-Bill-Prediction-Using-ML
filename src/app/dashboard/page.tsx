@@ -1,5 +1,5 @@
 "use client";
-import { Users, HeartHandshake, HandCoins, Briefcase } from "lucide-react";
+import { Users, HeartHandshake, HandCoins, Briefcase, BrainCircuit, TriangleAlert } from "lucide-react";
 import { StatCard } from "@/components/dashboard/StatCard";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card";
 import {
@@ -73,7 +73,15 @@ export default function DashboardPage() {
   useEffect(() => {
     fetch("http://127.0.0.1:8000/customers/overview")
       .then((res) => res.json())
-      .then((data) => setCustomerOverview(data))
+      .then((data: { name: string; total: number }[]) => {
+        const filtered = data.filter(
+          (item) =>
+            item.name &&
+            item.name.toLowerCase() !== "nan" &&
+            item.name.toLowerCase() !== "null"
+        );
+        setCustomerOverview(filtered);
+      })
       .catch(() => setCustomerOverview([]));
   }, []);
 
@@ -100,7 +108,7 @@ export default function DashboardPage() {
       </div>
 
       {/* Stats Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
         <StatCard
           title="Total Customers"
           value={
@@ -113,27 +121,27 @@ export default function DashboardPage() {
           title="Total Users"
           value={totalUsers === null ? "..." : totalUsers.toLocaleString()}
           icon={<HeartHandshake className="w-6 h-6" />}
-          trend={{ value: "5%", isPositive: true }}
+          trend={{ value: "1%", isPositive: true }}
+        />
+        {/* <StatCard
+          title="Prediction Accuracy"
+          value=""
+          icon={<BrainCircuit className="w-6 h-6" />}
+          trend={{ value: "3.2%", isPositive: true }}
         />
         <StatCard
-          title="Total Donations"
-          value="$52,000"
-          icon={<HandCoins className="w-6 h-6" />}
-          trend={{ value: "18%", isPositive: true }}
-        />
-        <StatCard
-          title="Active Projects"
-          value="12"
-          icon={<Briefcase className="w-6 h-6" />}
-          trend={{ value: "2", isPositive: true }}
-        />
+          title="High Consumption Alerts"
+          value="27"
+          icon={<TriangleAlert className="w-6 h-6" />}
+          trend={{ value: "8%", isPositive: false }}
+        /> */}
       </div>
 
       {/* Charts Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-1 gap-6">
         <Card>
           <CardHeader>
-            <CardTitle>Customer Overview</CardTitle>
+            <CardTitle>Branch Overview</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="h-[300px] w-full">
@@ -165,17 +173,17 @@ export default function DashboardPage() {
                       String(name ?? "Customers"),
                     ]}
                   />
-                  <Bar dataKey="total" fill="#0F766E" radius={[4, 4, 0, 0]} />
+                  <Bar dataKey="total" fill="#1104ffff" radius={[4, 4, 0, 0]} />
                 </BarChart>
               </ResponsiveContainer>
             </div>
           </CardContent>
         </Card>
 
-        
+
       </div>
 
-      
+
     </div>
   );
 }

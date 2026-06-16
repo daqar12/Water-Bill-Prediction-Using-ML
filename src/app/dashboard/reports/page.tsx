@@ -44,7 +44,7 @@ const reports = [
 ];
 
 const statsCards = [
-    { label: "Model Accuracy", value: "94.3%", icon: <TrendingUp className="w-5 h-5" />, color: "text-green-600", bg: "bg-green-50 dark:bg-green-900/20" },
+    { label: "Model Accuracy", value: "74.3%", icon: <TrendingUp className="w-5 h-5" />, color: "text-green-600", bg: "bg-green-50 dark:bg-green-900/20" },
     { label: "Predictions Made", value: "11,048", icon: <Droplets className="w-5 h-5" />, color: "text-blue-600", bg: "bg-blue-50 dark:bg-blue-900/20" },
     { label: "Anomalies Detected", value: "127", icon: <AlertTriangle className="w-5 h-5" />, color: "text-amber-600", bg: "bg-amber-50 dark:bg-amber-900/20" },
     { label: "Validated Predictions", value: "10,921", icon: <CheckCircle className="w-5 h-5" />, color: "text-teal-600", bg: "bg-teal-50 dark:bg-teal-900/20" },
@@ -72,11 +72,10 @@ export default function ReportsPage() {
                             <button
                                 key={m}
                                 onClick={() => setActiveMonth(m)}
-                                className={`px-3 py-1.5 rounded-md text-xs font-medium transition-all ${
-                                    activeMonth === m
+                                className={`px-3 py-1.5 rounded-md text-xs font-medium transition-all ${activeMonth === m
                                         ? "bg-white dark:bg-slate-700 text-primary shadow-sm"
                                         : "text-slate-500 hover:text-slate-700"
-                                }`}
+                                    }`}
                             >
                                 {m}
                             </button>

@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { Bell, Moon, Sun, ChevronDown, Settings, LogOut, UserCircle } from "lucide-react";
 import { usePathname, useRouter } from "next/navigation";
-import { getSession, clearSession } from "@/lib/session";
+import { getSession, clearSession, checkSessionExpired } from "@/lib/session";
 
 export function Navbar() {
   const pathname = usePathname();
@@ -11,6 +11,21 @@ export function Navbar() {
   const [isDark, setIsDark]           = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [user, setUser]               = useState<{ fullname?: string; email?: string; role?: string } | null>(null);
+
+  // Periodic check for session expiry
+  useEffect(() => {
+    const checkExpiry = () => {
+      if (checkSessionExpired()) {
+        clearSession();
+        alert("Your session has expired. Please log in again.");
+        router.push("/");
+      }
+    };
+
+    checkExpiry();
+    const interval = setInterval(checkExpiry, 5000);
+    return () => clearInterval(interval);
+  }, [router]);
 
   // Read session once on mount (sessionStorage is client-only)
   useEffect(() => {
